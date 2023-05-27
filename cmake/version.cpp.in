@@ -1,0 +1,6 @@
+#include "version.h"
+
+const uint16_t VERSION_YEAR = @BUILD_YEAR@;
+const uint8_t VERSION_MONTH = @BUILD_MONTH@;
+const uint8_t VERSION_REVISION = @BUILD_REV@;
+const char* VERSION_HASH = "@BUILD_HASH@";
