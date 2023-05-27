@@ -1,4 +1,4 @@
-set(BUILD_REV 0)
+set(REVISION 0)
 
 set(CURRENT_LIST_DIR ${CMAKE_CURRENT_LIST_DIR})
 if(NOT DEFINED pre_configure_dir)
@@ -44,7 +44,12 @@ function(check_version_read year month rev hash)
 endfunction()
 
 function(check_version)
+  string(TIMESTAMP BUILD_YEAR "%Y")
+  string(TIMESTAMP BUILD_MONTH "%m")
+  set(BUILD_REV "${REVISION}")
   # Get the latest abbreviated commit hash of the working branch
+  # %h - Short hash
+  # %H - Long hash 
   execute_process(
     COMMAND git log -1 --format=%h
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
@@ -76,9 +81,6 @@ function(check_version)
   if(NOT DEFINED BUILD_HASH_CACHE)
     set(BUILD_HASH_CACHE "INVALID")
   endif()
-
-  string(TIMESTAMP BUILD_YEAR "%Y")
-  string(TIMESTAMP BUILD_MONTH "%m")
 
   # Only update the version.cpp if the hash has changed. This will prevent us
   # from rebuilding the project more than we need to.
